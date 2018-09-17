@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Bem vindo ao WebCaixa!</title>
+	<h:outputStylesheet name="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</h:head>
+<h:body>
+	<h:form id="form1">
+		<p:panelGrid column="1">
+			<h:panelGroup style="display:block; margin: 0 auto;">
+				<p:dataTable rendered="#{caixaEletronico.selecao == false}"
+					style="width:250px;text-align: center;" var="cedula"
+					value="#{caixaEletronico.getCedulas()}" styleClass="text-center">
+					<p:column headerText="Valor">
+						<h:outputText value="#{cedula.valor}" />
+					</p:column>
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{cedula.qtd}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+		</p:panelGrid>
+		<h:outputText rendered="#{caixaEletronico.selecao == false}"
+			value="Entre com o valor desejado: " />
+		<p:inputText rendered="#{caixaEletronico.selecao == false}"
+			value="#{caixaEletronico.quantia}" />
+		<p:commandButton rendered="#{caixaEletronico.selecao == false}"
+			ajax="false" value="Sacar" action="#{caixaEletronico.sacar}" />
+		<p:outputLabel rendered="#{caixaEletronico.selecao == true}"
+			value="Selecione as opções:" />
+		<p:selectOneRadio rendered="#{caixaEletronico.selecao == true}"
+			value="#{caixaEletronico.opcaoSelecionada}" layout="responsive"
+			columns="3">
+			<f:selectItems value="#{caixaEletronico.opcoes}" />
+		</p:selectOneRadio>
+		<p:commandButton rendered="#{caixaEletronico.selecao == true}"
+			ajax="false" value="Confirmar saque"
+			action="#{caixaEletronico.confirmar}" />
+	</h:form>
+	<h:outputScript name="bootstrap-3.3.7-dist/js/bootstrap.min.js" />
+</h:body>
+
+</html>

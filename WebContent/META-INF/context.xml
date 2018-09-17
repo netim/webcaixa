@@ -1,0 +1,7 @@
+<Context>
+  <Resource name="jdbc/caixaDB"
+  			auth="Container"
+  			type="javax.sql.DataSource"
+  			driverClassName="org.sqlite.JDBC"
+  			url="jdbc:sqlite:${catalina.home}/wtpwebapps/caixa/WEB-INF/db/caixaDB.db"/>
+</Context>
